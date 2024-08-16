@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -34,4 +35,7 @@ public class OrderItemEntity {
     @Column(nullable = false, columnDefinition = "Decimal (5,2)")
     private BigDecimal price;
 
+    private String operation;
+    @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime dateEvent = LocalDateTime.now();
 }

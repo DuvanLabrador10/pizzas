@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -38,6 +39,10 @@ public class PizzaEntity {
 
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean available;
+
+    private String operation;
+    @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime dateEvent = LocalDateTime.now();
 
     @OneToMany(
             targetEntity = OrderItemEntity.class,
