@@ -18,7 +18,9 @@ public interface OrderMapper {
             @Mapping(source = "total", target = "total"),
             @Mapping(source = "method", target = "method"),
             @Mapping(source = "additionalNotes", target = "additionalNotes"),
-            @Mapping(source = "customer.idCustomer", target = "idCustomer")
+            @Mapping(source = "customer.idCustomer", target = "idCustomer"),
+            @Mapping(source = "operation", target = "operation"),
+            @Mapping(source = "dateEvent", target = "dateEvent")
     })
     OrderDto orderToOrderDto (OrderEntity order);
 

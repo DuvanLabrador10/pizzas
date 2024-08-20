@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public List<OrderDto> getAllOrders() {
+    public List<OrderDto> getAllOrders(int page, int size) {
         return List.of();
     }
 

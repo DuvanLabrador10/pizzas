@@ -23,7 +23,7 @@ public class OrderEntity {
     private Long idOrder;
 
     @Column(name = "fe_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime feDate = LocalDateTime.now();
+    private LocalDateTime feDate;
 
     @Column(nullable = false, columnDefinition = "Decimal (6,2)")
     private BigDecimal total;
@@ -36,7 +36,7 @@ public class OrderEntity {
 
     private String operation;
     @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent = LocalDateTime.now();
+    private LocalDateTime dateEvent;
 
     @ManyToOne(
             targetEntity = CustomerEntity.class,

@@ -18,6 +18,8 @@ public interface OrderItemMapper {
             @Mapping(source = "idPizza.idPizza", target = "idPizza"),
             @Mapping(source = "quantity", target = "quantity"),
             @Mapping(source = "price", target = "price"),
+            @Mapping(source = "operation", target = "operation"),
+            @Mapping(source = "dateEvent", target = "dateEvent")
   })
     OrderItemDto orderItemToOrderItemDto(OrderItemEntity orderItem);
 

@@ -18,7 +18,9 @@ public interface PizzaMapper {
             @Mapping(source = "price", target = "price"),
             @Mapping(source = "vegetarian", target = "vegetarian"),
             @Mapping(source = "vegan", target = "vegan"),
-            @Mapping(source = "available", target = "available")
+            @Mapping(source = "available", target = "available"),
+            @Mapping(source = "operation", target = "operation"),
+            @Mapping(source = "dateEvent", target = "dateEvent")
     })
     PizzaDto pizzaToPizzaDto(PizzaEntity pizza);
 

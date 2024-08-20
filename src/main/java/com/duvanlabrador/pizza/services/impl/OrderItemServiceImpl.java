@@ -4,6 +4,9 @@ import com.duvanlabrador.pizza.persistence.dto.OrderItemDto;
 import com.duvanlabrador.pizza.persistence.mappers.OrderItemMapper;
 import com.duvanlabrador.pizza.persistence.mappers.OrderMapper;
 import com.duvanlabrador.pizza.persistence.mappers.PizzaMapper;
+import com.duvanlabrador.pizza.persistence.repository.OrderItemRepository;
+import com.duvanlabrador.pizza.persistence.repository.OrderRepository;
+import com.duvanlabrador.pizza.persistence.repository.PizzaRepository;
 import com.duvanlabrador.pizza.services.interfaces.OrderItemService;
 import com.duvanlabrador.pizza.services.interfaces.OrderService;
 import com.duvanlabrador.pizza.services.interfaces.PizzaService;
@@ -16,15 +19,15 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderItemServiceImpl implements OrderItemService {
 
-    private final OrderItemService orderItemService;
+    private final OrderItemRepository orderItemRepository;
     private final OrderItemMapper orderItemMapper;
-    private final OrderService orderService;
+    private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private final PizzaService pizzaService;
+    private final PizzaRepository pizzaRepository;
     private final PizzaMapper pizzaMapper;
 
     @Override
-    public List<OrderItemDto> getAllOrdersItems() {
+    public List<OrderItemDto> getAllOrdersItems(int page, int size) {
         return List.of();
     }
 

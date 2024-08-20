@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
 
     @Override
-    public List<CustomerDto> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers(int page, int size) {
         return List.of();
     }
 

@@ -37,5 +37,5 @@ public class OrderItemEntity {
 
     private String operation;
     @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent = LocalDateTime.now();
+    private LocalDateTime dateEvent;
 }

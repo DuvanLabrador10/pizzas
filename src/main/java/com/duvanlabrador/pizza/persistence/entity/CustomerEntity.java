@@ -29,7 +29,7 @@ public class CustomerEntity {
     private String address;
 
     @Email
-    @Column(nullable = false, unique = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
 
     @Column(name = "phone_number", length = 20)
@@ -37,7 +37,7 @@ public class CustomerEntity {
 
     private String operation;
     @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent = LocalDateTime.now();
+    private LocalDateTime dateEvent;
 
     @OneToMany(
             targetEntity = OrderEntity.class,
