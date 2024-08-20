@@ -1,7 +1,7 @@
 package com.duvanlabrador.pizza.persistence.mappers;
 
-import com.duvanlabrador.pizza.persistence.dto.CustomerDto;
-import com.duvanlabrador.pizza.persistence.entity.CustomerEntity;
+import com.duvanlabrador.pizza.persistence.dto.OrderItemDto;
+import com.duvanlabrador.pizza.persistence.entity.OrderItemEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -11,10 +11,10 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE
 )
-public interface CustomerMapper {
+public interface OrderItemMapper {
 
-    CustomerDto customerToCustomerDto (CustomerEntity customer);
+    OrderItemDto orderItemToOrderItemDto(OrderItemEntity orderItem);
 
     @InheritInverseConfiguration
-    CustomerEntity customerDtoToCustomer (CustomerDto customerDto);
+    OrderItemEntity orderItemDtoToOrderItem(OrderItemDto orderItemDto);
 }
