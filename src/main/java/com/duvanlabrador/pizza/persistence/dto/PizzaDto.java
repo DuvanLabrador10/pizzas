@@ -16,9 +16,10 @@ public class PizzaDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long idPizza;
     private String name;
+    private String description;
     private BigDecimal price;
-    private Boolean Vegetarian;
-    private Boolean Vegan;
+    private Boolean vegetarian;
+    private Boolean vegan;
     private Boolean available;
     private String operation;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

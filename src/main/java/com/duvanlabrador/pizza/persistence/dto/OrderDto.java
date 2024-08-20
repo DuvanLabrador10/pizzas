@@ -19,6 +19,7 @@ public class OrderDto {
     private BigDecimal total;
     private String method;
     private String additionalNotes;
+    private Long idCustomer;
     private String operation;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateEvent;

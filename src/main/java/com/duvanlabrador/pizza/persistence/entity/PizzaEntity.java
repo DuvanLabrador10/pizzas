@@ -32,10 +32,10 @@ public class PizzaEntity {
     private BigDecimal price;
 
     @Column(columnDefinition = "TINYINT")
-    private Boolean Vegetarian;
+    private Boolean vegetarian;
 
     @Column(columnDefinition = "TINYINT")
-    private Boolean Vegan;
+    private Boolean vegan;
 
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean available;

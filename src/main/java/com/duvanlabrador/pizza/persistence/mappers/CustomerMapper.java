@@ -2,9 +2,7 @@ package com.duvanlabrador.pizza.persistence.mappers;
 
 import com.duvanlabrador.pizza.persistence.dto.CustomerDto;
 import com.duvanlabrador.pizza.persistence.entity.CustomerEntity;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(
         componentModel = "spring",
@@ -13,6 +11,14 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface CustomerMapper {
 
+
+    @Mappings({
+            @Mapping(source = "idCustomer", target = "idCustomer"),
+            @Mapping(source = "name", target = "name"),
+            @Mapping(source = "address", target = "address"),
+            @Mapping(source = "email", target = "email"),
+            @Mapping(source = "phoneNumber", target = "phoneNumber")
+    })
     CustomerDto customerToCustomerDto (CustomerEntity customer);
 
     @InheritInverseConfiguration

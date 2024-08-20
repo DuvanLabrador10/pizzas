@@ -2,9 +2,7 @@ package com.duvanlabrador.pizza.persistence.mappers;
 
 import com.duvanlabrador.pizza.persistence.dto.OrderItemDto;
 import com.duvanlabrador.pizza.persistence.entity.OrderItemEntity;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(
         componentModel = "spring",
@@ -13,6 +11,14 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface OrderItemMapper {
 
+
+    @Mappings({
+            @Mapping(source = "idItem", target = "idItem"),
+            @Mapping(source = "idOrder.idOrder", target = "idOrder"),
+            @Mapping(source = "idPizza.idPizza", target = "idPizza"),
+            @Mapping(source = "quantity", target = "quantity"),
+            @Mapping(source = "price", target = "price"),
+  })
     OrderItemDto orderItemToOrderItemDto(OrderItemEntity orderItem);
 
     @InheritInverseConfiguration
