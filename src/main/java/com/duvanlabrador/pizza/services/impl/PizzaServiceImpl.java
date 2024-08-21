@@ -86,6 +86,16 @@ public class PizzaServiceImpl implements PizzaService {
         return true;
     }
 
+    @Override
+    public Optional<List<PizzaDto>> getAllPizzasAvailable() {
+        Optional<List<PizzaEntity>> pizzaEntities = this.pizzaRepository.findAllAvailablePizzas();
+        if (pizzaEntities.isEmpty()){
+            throw new ResourceNotFoundException("The list is empty!");
+        }
+        List<PizzaDto> pizzaDto = pizzaEntities.get().stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
+        return Optional.of(pizzaDto);
+    }
+
     private void verifyPizza(Long idPizza) {
         Optional<PizzaEntity> pizza = this.pizzaRepository.findById(idPizza);
         if (pizza.isEmpty()) {
