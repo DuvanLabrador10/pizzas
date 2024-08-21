@@ -1,5 +1,6 @@
 package com.duvanlabrador.pizza.services.impl;
 
+import com.duvanlabrador.pizza.exception.ResourceBadRequestException;
 import com.duvanlabrador.pizza.exception.ResourceNotFoundException;
 import com.duvanlabrador.pizza.persistence.dto.PizzaDto;
 import com.duvanlabrador.pizza.persistence.entity.PizzaEntity;
@@ -7,6 +8,7 @@ import com.duvanlabrador.pizza.persistence.mappers.PizzaMapper;
 import com.duvanlabrador.pizza.persistence.repository.PizzaRepository;
 import com.duvanlabrador.pizza.services.interfaces.PizzaService;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,10 +29,10 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public List<PizzaDto> getAllPizzas() {
         List<PizzaEntity> pizza = this.pizzaRepository.findAll();
-        if(pizza.isEmpty()){
+        if (pizza.isEmpty()) {
             throw new RuntimeException("Pizza don't exists!!");
         }
-        return  pizza.stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
+        return pizza.stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
     }
 
     @Override
@@ -40,29 +42,53 @@ public class PizzaServiceImpl implements PizzaService {
         return this.pizzaMapper.pizzaToPizzaDto(pizza);
     }
 
+
     @Override
     public PizzaDto createPizza(PizzaDto pizzaDto) {
         PizzaEntity pizza = this.pizzaMapper.pizzaDtoToPizza(pizzaDto);
-        if(pizza.getDateEvent()==null){
+
+        if (pizza.getDateEvent() == null) {
             pizza.setDateEvent(LocalDateTime.now());
         }
-        PizzaEntity pizzaSave = this.pizzaRepository.save(pizza);
-        return this.pizzaMapper.pizzaToPizzaDto(pizzaSave);
+
+        try {
+            PizzaEntity pizzaSave = this.pizzaRepository.save(pizza);
+            return this.pizzaMapper.pizzaToPizzaDto(pizzaSave);
+        } catch (DataIntegrityViolationException e) {
+            throw new ResourceBadRequestException("The pizza with name '" + pizza.getName() + "' already exists.");
+        }
     }
+
 
     @Override
     public PizzaDto updatePizza(Long idPizza, PizzaDto pizzaDto) {
-        return null;
+        verifyPizza(idPizza);
+        PizzaEntity pizza = this.pizzaRepository.findById(idPizza).get();
+        pizza.setName(pizzaDto.getName());
+        pizza.setDescription(pizzaDto.getDescription());
+        pizza.setPrice(pizzaDto.getPrice());
+        pizza.setVegetarian(pizzaDto.getVegetarian());
+        pizza.setVegan(pizzaDto.getVegan());
+        pizza.setAvailable(pizzaDto.getAvailable());
+        try {
+            PizzaEntity pizzaUpdate = this.pizzaRepository.save(pizza);
+            return this.pizzaMapper.pizzaToPizzaDto(pizzaUpdate);
+        } catch (DataIntegrityViolationException e) {
+            throw new ResourceBadRequestException("The pizza with name '" + pizza.getName() + "' already exists.");
+        }
     }
 
     @Override
     public Boolean deletePizzaById(Long idPizza) {
-        return null;
+        verifyPizza(idPizza);
+        PizzaEntity pizza = this.pizzaRepository.findById(idPizza).get();
+        this.pizzaRepository.delete(pizza);
+        return true;
     }
 
-    private void verifyPizza(Long idPizza){
+    private void verifyPizza(Long idPizza) {
         Optional<PizzaEntity> pizza = this.pizzaRepository.findById(idPizza);
-        if(pizza.isEmpty()){
+        if (pizza.isEmpty()) {
             throw new ResourceNotFoundException("The pizza whit id " + idPizza + " don't exist");
         }
     }
