@@ -11,9 +11,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -27,12 +27,14 @@ public class PizzaServiceImpl implements PizzaService {
 
 
     @Override
-    public List<PizzaDto> getAllPizzas() {
-        List<PizzaEntity> pizza = this.pizzaRepository.findAll();
+    public List<PizzaDto> getAllPizzas(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        Page<PizzaEntity> pizza = this.pizzaRepository.findAll(pageable);
         if (pizza.isEmpty()) {
             throw new RuntimeException("Pizza don't exists!!");
         }
-        return pizza.stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
+
+        return pizza.getContent().stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
     }
 
     @Override

@@ -20,8 +20,9 @@ public class PizzaController {
     private final PizzaService pizzaService;
 
     @GetMapping("")
-    public List<PizzaDto> getAllPizzas() {
-        return this.pizzaService.getAllPizzas();
+    public List<PizzaDto> getAllPizzas(@RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "10") int size) {
+        return this.pizzaService.getAllPizzas(page, size);
     }
 
     @GetMapping("/{idPizza}")
