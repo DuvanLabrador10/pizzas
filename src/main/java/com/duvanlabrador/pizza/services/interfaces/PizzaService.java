@@ -2,6 +2,7 @@ package com.duvanlabrador.pizza.services.interfaces;
 
 import com.duvanlabrador.pizza.persistence.dto.PizzaDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,5 +14,6 @@ public interface PizzaService {
     public PizzaDto updatePizza(Long idPizza, PizzaDto pizzaDto);
     public Boolean deletePizzaById(Long idPizza);
     public Optional<List<PizzaDto>> getAllPizzasAvailable();
+    public void updatePrice(Long idPizza, BigDecimal newPrice);
 
 }

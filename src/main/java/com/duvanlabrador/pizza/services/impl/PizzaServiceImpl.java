@@ -7,6 +7,7 @@ import com.duvanlabrador.pizza.persistence.entity.PizzaEntity;
 import com.duvanlabrador.pizza.persistence.mappers.PizzaMapper;
 import com.duvanlabrador.pizza.persistence.repository.PizzaRepository;
 import com.duvanlabrador.pizza.services.interfaces.PizzaService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -96,6 +98,13 @@ public class PizzaServiceImpl implements PizzaService {
         }
         List<PizzaDto> pizzaDto = pizzaEntities.get().stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
         return Optional.of(pizzaDto);
+    }
+
+    @Transactional
+    @Override
+    public void updatePrice(Long idPizza, BigDecimal newPrice) {
+        verifyPizza(idPizza);
+        this.pizzaRepository.updatePrice(idPizza,newPrice);
     }
 
     private void verifyPizza(Long idPizza) {

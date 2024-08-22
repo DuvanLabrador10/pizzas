@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,12 @@ public class PizzaController {
     public ResponseEntity<PizzaDto> updatePizza(@PathVariable Long idPizza, @RequestBody PizzaDto pizzaDto) throws ResourceNotFoundException {
         PizzaDto pizza = this.pizzaService.updatePizza(idPizza, pizzaDto);
         return new ResponseEntity<>(pizza, HttpStatus.OK);
+    }
+
+    @PutMapping("/price/{idPizza}")
+    public ResponseEntity<String> updatePricePizza(@PathVariable Long idPizza, @RequestParam BigDecimal newPrice) throws ResourceNotFoundException {
+        this.pizzaService.updatePrice(idPizza,newPrice);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{idPizza}")
