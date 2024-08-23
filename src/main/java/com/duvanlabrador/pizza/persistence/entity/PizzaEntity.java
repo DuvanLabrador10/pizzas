@@ -1,10 +1,10 @@
 package com.duvanlabrador.pizza.persistence.entity;
 
+import com.duvanlabrador.pizza.listener.AuditPizzaListener;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -15,6 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "tb_pizza")
+@EntityListeners({AuditPizzaListener.class})
 public class PizzaEntity {
 
     @Id

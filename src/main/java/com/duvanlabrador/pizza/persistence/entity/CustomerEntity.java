@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
