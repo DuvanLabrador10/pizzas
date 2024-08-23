@@ -18,8 +18,6 @@ public interface CustomerMapper {
             @Mapping(source = "address", target = "address"),
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phoneNumber", target = "phoneNumber"),
-            @Mapping(source = "operation", target = "operation"),
-            @Mapping(source = "dateEvent", target = "dateEvent")
     })
     CustomerDto customerToCustomerDto (CustomerEntity customer);
 

@@ -40,10 +40,6 @@ public class PizzaEntity {
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean available;
 
-    private String operation;
-    @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent;
-
     @OneToMany(
             targetEntity = OrderItemEntity.class,
             fetch = FetchType.LAZY,

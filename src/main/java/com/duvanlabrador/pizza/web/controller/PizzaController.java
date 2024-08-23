@@ -21,9 +21,13 @@ public class PizzaController {
     private final PizzaService pizzaService;
 
     @GetMapping("")
-    public List<PizzaDto> getAllPizzas(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<List<PizzaDto>> getAllPizzas(@RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "10") int size) {
-        return this.pizzaService.getAllPizzas(page, size);
+        List<PizzaDto> pizzas = this.pizzaService.getAllPizzas(page, size);
+        if (pizzas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(pizzas, HttpStatus.OK);
     }
 
     @GetMapping("/{idPizza}")

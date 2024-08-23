@@ -21,7 +21,4 @@ public class PizzaDto {
     private Boolean vegetarian;
     private Boolean vegan;
     private Boolean available;
-    private String operation;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime dateEvent;
 }

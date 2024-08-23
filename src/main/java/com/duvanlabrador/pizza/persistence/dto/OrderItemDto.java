@@ -21,8 +21,4 @@ public class OrderItemDto {
     private Long idPizza;
     private Integer quantity;
     private BigDecimal price;
-    private String operation;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime dateEvent;
-
 }

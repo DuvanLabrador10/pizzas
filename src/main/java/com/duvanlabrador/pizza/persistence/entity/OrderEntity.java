@@ -34,10 +34,6 @@ public class OrderEntity {
     @Column(name = "additional_notes", length = 200)
     private String additionalNotes;
 
-    private String operation;
-    @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent;
-
     @ManyToOne(
             targetEntity = CustomerEntity.class,
             fetch = FetchType.LAZY,

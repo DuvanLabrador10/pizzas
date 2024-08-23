@@ -18,7 +18,4 @@ public class CustomerDto {
     private String address;
     private String email;
     private String phoneNumber;
-    private String operation;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime dateEvent;
 }

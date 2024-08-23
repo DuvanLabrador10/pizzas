@@ -34,11 +34,6 @@ public class CustomerEntity {
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
-
-    private String operation;
-    @Column(name = "date_event", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateEvent;
-
     @OneToMany(
             targetEntity = OrderEntity.class,
             fetch = FetchType.LAZY,

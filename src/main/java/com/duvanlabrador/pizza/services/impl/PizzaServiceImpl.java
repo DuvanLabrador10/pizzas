@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class PizzaServiceImpl implements PizzaService {
         Pageable pageable = PageRequest.of(page,size);
         Page<PizzaEntity> pizza = this.pizzaRepository.findAll(pageable);
         if (pizza.isEmpty()) {
-            throw new RuntimeException("Pizza don't exists!!");
+            return Collections.emptyList();
         }
 
         return pizza.getContent().stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
@@ -50,10 +51,6 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public PizzaDto createPizza(PizzaDto pizzaDto) {
         PizzaEntity pizza = this.pizzaMapper.pizzaDtoToPizza(pizzaDto);
-
-        if (pizza.getDateEvent() == null) {
-            pizza.setDateEvent(LocalDateTime.now());
-        }
 
         try {
             PizzaEntity pizzaSave = this.pizzaRepository.save(pizza);
