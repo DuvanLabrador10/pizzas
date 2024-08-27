@@ -1,5 +1,8 @@
 package com.duvanlabrador.pizza.web.controller;
 
+import com.duvanlabrador.pizza.exception.ResourceBadRequestException;
+import com.duvanlabrador.pizza.exception.ResourceForbidden;
+import com.duvanlabrador.pizza.exception.ResourceNotFoundException;
 import com.duvanlabrador.pizza.persistence.projections.OrderSummary;
 import com.duvanlabrador.pizza.services.interfaces.OrderService;
 import lombok.AllArgsConstructor;
@@ -17,7 +20,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/summary/{orderId}")
-    public ResponseEntity<OrderSummary> getSummary(@PathVariable Long orderId){
+    public ResponseEntity<OrderSummary> getSummary(@PathVariable Long orderId) throws ResourceNotFoundException, ResourceBadRequestException, ResourceForbidden {
         return ResponseEntity.ok(this.orderService.getSummary(orderId));
     }
 }

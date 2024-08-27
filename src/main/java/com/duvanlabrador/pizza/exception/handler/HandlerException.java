@@ -1,6 +1,7 @@
 package com.duvanlabrador.pizza.exception.handler;
 
 import com.duvanlabrador.pizza.exception.ResourceBadRequestException;
+import com.duvanlabrador.pizza.exception.ResourceForbidden;
 import com.duvanlabrador.pizza.exception.ResourceNotFoundException;
 import com.duvanlabrador.pizza.persistence.dto.ErrorDetail;
 import lombok.AllArgsConstructor;
@@ -38,5 +39,16 @@ public class HandlerException {
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass().getName());
         return new ResponseEntity<>(errorDetail,null,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResourceForbidden.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<?> resourceForbidden(ResourceForbidden ex){
+        errorDetail.setDateTime(new Date());
+        errorDetail.setStatus(HttpStatus.FORBIDDEN.value());
+        errorDetail.setTitle("Forbidden Exception");
+        errorDetail.setDetail(ex.getMessage());
+        errorDetail.setDeveloperMessage(ex.getClass().getName());
+        return new ResponseEntity<>(errorDetail,null,HttpStatus.FORBIDDEN);
     }
 }

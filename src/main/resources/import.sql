@@ -24,3 +24,6 @@ INSERT INTO tb_order_item(id_order, id_pizza, quantity, price) VALUES (3, 3, 1, 
 INSERT INTO tb_order_item(id_order, id_pizza, quantity, price) VALUES (4, 4, 1, 12.0);
 INSERT INTO tb_order_item(id_order, id_pizza, quantity, price) VALUES (5, 5, 1, 5.0);
 INSERT INTO tb_order_item(id_order, id_pizza, quantity, price) VALUES (1, 6, 1, 10.0);
+
+INSERT INTO users(username, password, email, locked, disabled) VALUES ("admin", "$2y$10$O7MUR/YifUPEy/zTW5h3s.bqQtqIPbA2WsbledIMGEAiQ.iLf5WQ2", "admin@gmail.com", false, false);
+INSERT INTO users(username, password, email, locked, disabled) VALUES ("customer", "$2y$10$DmX2Jtf3Z4aXhvTwHpWqxeKTxa3LvJxrrRObqu4XD6dfc8sN38rvK", "customer@gmail.com", false, false);
