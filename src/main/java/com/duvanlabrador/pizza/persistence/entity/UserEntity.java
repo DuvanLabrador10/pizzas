@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class UserEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(length = 20, unique = true, nullable = false)
+    @Column(length = 20, nullable = false)
     private String username;
 
     @Column(length = 200, nullable = false)
@@ -34,4 +36,11 @@ public class UserEntity {
 
     @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean disabled;
+
+    @OneToMany(
+            targetEntity = UserRolEntity.class,
+            fetch = FetchType.EAGER,
+            mappedBy = "user"
+    )
+    List<UserRolEntity> userRol;
 }

@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public List<PizzaDto> getAllPizzas(int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         Page<PizzaEntity> pizza = this.pizzaRepository.findAll(pageable);
         if (pizza.isEmpty()) {
             return Collections.emptyList();
@@ -90,7 +89,7 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public Optional<List<PizzaDto>> getAllPizzasAvailable() {
         Optional<List<PizzaEntity>> pizzaEntities = this.pizzaRepository.findAllAvailablePizzas();
-        if (pizzaEntities.isEmpty()){
+        if (pizzaEntities.isEmpty()) {
             throw new ResourceNotFoundException("The list is empty!");
         }
         List<PizzaDto> pizzaDto = pizzaEntities.get().stream().map(this.pizzaMapper::pizzaToPizzaDto).toList();
@@ -101,7 +100,7 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public void updatePrice(Long idPizza, BigDecimal newPrice) {
         verifyPizza(idPizza);
-        this.pizzaRepository.updatePrice(idPizza,newPrice);
+        this.pizzaRepository.updatePrice(idPizza, newPrice);
     }
 
     private void verifyPizza(Long idPizza) {
