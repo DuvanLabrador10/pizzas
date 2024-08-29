@@ -20,7 +20,7 @@ public class HistoryEntity {
     @Column(name = "id_history")
     private Long idHistory;
     private String name;
-    //private String user;
+    private String username;
     private String operation;
     private LocalDateTime date;
 }

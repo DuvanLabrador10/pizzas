@@ -10,12 +10,23 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: 'true'
+        format_sql: true
     hibernate:
       ddl-auto: create-drop
-    show-sql: 'true'
+    show-sql: true
+
 logging:
   level:
     org:
       hibernate:
         SQL: debug
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /openapi/v3/api-docs
+    packages: com.duvanlabrador.pizza.web.controller
+  swagger-ui:
+    enabled: true
+    path: /openapi/swagger-ui.html
+  paths-to-match: /**

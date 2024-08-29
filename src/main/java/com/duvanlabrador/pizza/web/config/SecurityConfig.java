@@ -33,10 +33,11 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/openapi/**").permitAll()
                         .requestMatchers("/api/v1/customer/**").hasAnyRole("ADMIN", "CUSTOMER")
                         .requestMatchers("/api/v1/orders/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/pizzas/available").hasAuthority("get_available_pizzas")
-                        .requestMatchers("/api/v1/pizzas/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/pizzas/**").hasAnyRole("ADMIN","CHEF")
                         .anyRequest()
                         .authenticated())
                         .csrf(conf -> conf.disable())

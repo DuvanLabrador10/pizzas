@@ -24,10 +24,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody LoginDto loginDto){
         UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
-        Authentication authentication = this.authenticationManager.authenticate(login);
+        this.authenticationManager.authenticate(login);
 
-        System.out.println(authentication.isAuthenticated());
-        System.out.println(authentication.getPrincipal());
+        //System.out.println(authentication.isAuthenticated());
+        //System.out.println(authentication.getPrincipal());
 
         String jwt = jwtUtil.create(loginDto.getUsername());
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,jwt).build();
