@@ -6,12 +6,13 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "duvan_platzi";
+    private static final String SECRET_KEY = "6caf2fb867d76fe8ffca674e4b125bbb1eeb74a4a04b732a83978c0948289ffe";
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
 
 
@@ -20,7 +21,9 @@ public class JwtUtil {
                 .withSubject(username)
                 .withIssuer("duvan-labrador")
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(15)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) // The token last 30 min
+                .withJWTId(UUID.randomUUID().toString())
+                .withNotBefore(new Date(System.currentTimeMillis()))// Is valid NOW
                 .sign(ALGORITHM);
     }
 
